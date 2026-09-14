@@ -1,5 +1,6 @@
 ---
 import EmailSignup from './EmailSignup.astro';
+import { instagramUrl } from '../config';
 
 const year = new Date().getFullYear();
 ---
@@ -19,7 +20,7 @@ const year = new Date().getFullYear();
 				<li>
 					<a
 						class="text-charcoal transition-colors hover:text-ink"
-						href="https://instagram.com/"
+						href={instagramUrl}
 						rel="me noopener"
 						target="_blank">Instagram</a
 					>

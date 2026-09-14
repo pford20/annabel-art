@@ -2,5 +2,5 @@
 # In production these live in Cloudflare > Pages > Settings > Environment variables.
 
 RESEND_API_KEY=
-COMMISSION_FROM="Annabel Art <commissions@example.com>"
-COMMISSION_TO="annabel@example.com"
+INQUIRY_FROM="Annabel Art <commissions@example.com>"
+INQUIRY_TO="annabel@example.com"

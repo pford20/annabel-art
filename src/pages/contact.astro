@@ -1,9 +1,77 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+import { site, instagramUrl } from '../config';
 ---
 
-<Layout title="Contact">
+<Layout title="Contact" description="Get in touch with Annabel about work, prints, or commissions.">
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
-		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">Contact</h1>
+		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">
+			Contact
+		</h1>
+
+		<div class="mt-12 grid gap-12 sm:mt-16 sm:grid-cols-[1fr_auto] sm:gap-20">
+			<div class="max-w-xl">
+				<InquiryForm
+					endpoint="/api/contact"
+					submitLabel="Send message"
+					success="Thank you. Your message is in, and Annabel will reply soon."
+				>
+					<div>
+						<label class="label" for="name">Name</label>
+						<input
+							class="field"
+							type="text"
+							id="name"
+							name="name"
+							required
+							autocomplete="name"
+						/>
+					</div>
+
+					<div>
+						<label class="label" for="email">Email</label>
+						<input
+							class="field"
+							type="email"
+							id="email"
+							name="email"
+							required
+							autocomplete="email"
+						/>
+					</div>
+
+					<div>
+						<label class="label" for="message">Message</label>
+						<textarea class="field" id="message" name="message" rows="6" required></textarea>
+					</div>
+				</InquiryForm>
+			</div>
+
+			<div class="text-sm">
+				<h2 class="font-display text-2xl font-normal text-ink">Or reach her directly</h2>
+				<ul class="mt-4 flex flex-col gap-2">
+					<li>
+						<a class="text-charcoal transition-colors hover:text-ink" href={`mailto:${site.email}`}>
+							{site.email}
+						</a>
+					</li>
+					<li>
+						<a
+							class="text-charcoal transition-colors hover:text-ink"
+							href={instagramUrl}
+							rel="me noopener"
+							target="_blank">@{site.instagramHandle}</a
+						>
+					</li>
+				</ul>
+				<p class="mt-6 max-w-xs text-stone">
+					For commission pricing, use the
+					<a class="text-charcoal underline transition-colors hover:text-ink" href="/commissions"
+						>commission request form</a
+					>.
+				</p>
+			</div>
+		</div>
 	</div>
 </Layout>
