@@ -1,4 +1,6 @@
 ---
+import EmailSignup from './EmailSignup.astro';
+
 const year = new Date().getFullYear();
 ---
 
@@ -6,18 +8,10 @@ const year = new Date().getFullYear();
 	<div
 		class="mx-auto grid max-w-site gap-10 px-5 py-12 sm:grid-cols-2 sm:gap-16 sm:px-12 sm:py-16"
 	>
-		<div>
-			<h2 class="font-display text-2xl font-normal text-ink">Stay in touch</h2>
-			<p class="mt-2 max-w-sm text-sm text-charcoal">
-				New work, shows, and print releases. A few times a year.
-			</p>
-			<!-- Placeholder. Swap for the MailerLite embed. -->
-			<div
-				class="mt-4 flex max-w-sm items-center justify-center border border-dashed border-mist px-4 py-6 text-sm text-stone"
-			>
-				MailerLite signup goes here
-			</div>
-		</div>
+		<EmailSignup
+			heading="Stay in touch"
+			blurb="New work, shows, and print releases. A few times a year."
+		/>
 
 		<div class="sm:justify-self-end">
 			<h2 class="sr-only">Elsewhere</h2>

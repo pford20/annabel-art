@@ -1,0 +1,23 @@
+---
+interface Props {
+	heading?: string;
+	blurb?: string;
+}
+
+const { heading, blurb } = Astro.props;
+---
+
+<div>
+	{heading && <h2 class="font-display text-2xl font-normal text-ink">{heading}</h2>}
+	{blurb && <p class="mt-2 max-w-sm text-sm text-charcoal">{blurb}</p>}
+
+	<!-- Placeholder. Swap this box for the MailerLite embed code. -->
+	<div
+		class:list={[
+			'flex max-w-sm items-center justify-center border border-dashed border-mist px-4 py-6 text-sm text-stone',
+			(heading || blurb) && 'mt-4',
+		]}
+	>
+		MailerLite signup goes here
+	</div>
+</div>

@@ -1,9 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import EmailSignup from '../components/EmailSignup.astro';
 ---
 
-<Layout title="Prints">
+<Layout title="Prints" description="Signed, limited-edition prints from annabel art. Coming soon.">
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
-		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">Prints</h1>
+		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">
+			Prints
+		</h1>
+
+		<p class="mt-6 max-w-prose text-charcoal">
+			Signed, limited-edition prints are on the way. Join the list below to hear first.
+		</p>
+
+		<div class="mt-10">
+			<EmailSignup />
+		</div>
 	</div>
 </Layout>
