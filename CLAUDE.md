@@ -22,7 +22,7 @@ Reference aesthetic: nikeadawi.se — one flat uniform grid, minimal product cop
 Every painting is one folder in `src/content/work/<slug>/` containing:
 - `index.md` with frontmatter:
   - `title` (string)
-  - `medium` (string, e.g. "Oil on canvas")
+  - `medium` (string, e.g. "Acrylic on canvas")
   - `width`, `height` (inches, numbers)
   - `year` (number)
   - `type`: `original` | `print`
