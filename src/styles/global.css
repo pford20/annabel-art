@@ -1,1 +1,46 @@
-@import "tailwindcss";
+/* Self-hosted fonts, weight axis only — no optical-size/SOFT/WONK axes we don't use. */
+@import '@fontsource-variable/fraunces/wght.css';
+@import '@fontsource-variable/inter/wght.css';
+@import 'tailwindcss';
+
+@theme {
+	/* Wipe Tailwind's stock palette. BRAND.md: no color anywhere except the
+	   paintings. With this line, bg-red-500 / text-white simply don't exist,
+	   so an off-brand color can't slip in by accident. */
+	--color-*: initial;
+
+	/* The only five colors in the system. */
+	--color-ink: #111111;      /* text, wordmark, buttons */
+	--color-paper: #faf9f6;    /* page background */
+	--color-charcoal: #3a3a3a; /* secondary text */
+	--color-stone: #8a8a8a;    /* captions, placeholder */
+	--color-mist: #e5e3de;     /* dividers, borders, hover */
+
+	/* Two typefaces. No third. */
+	--font-display: 'Fraunces Variable', Georgia, serif;
+	--font-body: 'Inter Variable', system-ui, sans-serif;
+
+	/* Max content width -> max-w-site */
+	--container-site: 1280px;
+}
+
+@layer base {
+	html {
+		background-color: var(--color-paper);
+	}
+
+	body {
+		background-color: var(--color-paper);
+		color: var(--color-ink);
+		font-family: var(--font-body);
+		font-size: 16px;
+		line-height: 1.6;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+	}
+
+	::selection {
+		background-color: var(--color-mist);
+		color: var(--color-ink);
+	}
+}

@@ -2,16 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Annabel Art">
-	<main class="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-6 py-24">
-		<p class="text-sm font-medium uppercase tracking-widest text-stone-500">
-			Portfolio
-		</p>
-		<h1 class="mt-4 text-5xl font-semibold tracking-tight text-balance sm:text-6xl">
-			Annabel Art
-		</h1>
-		<p class="mt-6 max-w-prose text-lg leading-relaxed text-stone-600">
-			A site under construction. Built with Astro and Tailwind CSS.
-		</p>
-	</main>
+<Layout>
+	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
+		<h1 class="sr-only">annabel art</h1>
+
+		<!-- Shell. BRAND.md: let one painting fill the hero. This becomes the
+		     featured piece once work is added to the content collection. -->
+		<div
+			class="flex aspect-[4/5] w-full items-center justify-center border border-dashed border-mist text-sm text-stone sm:aspect-[3/2]"
+		>
+			Featured painting
+		</div>
+	</div>
 </Layout>

@@ -1,0 +1,48 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-mist sm:mt-32">
+	<div
+		class="mx-auto grid max-w-site gap-10 px-5 py-12 sm:grid-cols-2 sm:gap-16 sm:px-12 sm:py-16"
+	>
+		<div>
+			<h2 class="font-display text-2xl font-normal text-ink">Stay in touch</h2>
+			<p class="mt-2 max-w-sm text-sm text-charcoal">
+				New work, shows, and print releases. A few times a year.
+			</p>
+			<!-- Placeholder. Swap for the MailerLite embed. -->
+			<div
+				class="mt-4 flex max-w-sm items-center justify-center border border-dashed border-mist px-4 py-6 text-sm text-stone"
+			>
+				MailerLite signup goes here
+			</div>
+		</div>
+
+		<div class="sm:justify-self-end">
+			<h2 class="sr-only">Elsewhere</h2>
+			<ul class="flex flex-col gap-2 text-sm">
+				<li>
+					<a
+						class="text-charcoal transition-colors hover:text-ink"
+						href="https://instagram.com/"
+						rel="me noopener"
+						target="_blank">Instagram</a
+					>
+				</li>
+				<li>
+					<a class="text-charcoal transition-colors hover:text-ink" href="/contact">Contact</a>
+				</li>
+				<li>
+					<a class="text-charcoal transition-colors hover:text-ink" href="/commissions"
+						>Commissions</a
+					>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="mx-auto max-w-site px-5 pb-10 sm:px-12">
+		<p class="text-[13px] text-stone">&copy; {year} annabel art</p>
+	</div>
+</footer>
