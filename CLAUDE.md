@@ -16,7 +16,7 @@ Reference aesthetic: nikeadawi.se — one flat uniform grid, minimal product cop
 - Images: Astro `<Image>`, sourced from `src/content/work/<slug>/`
 
 ## Pages
-`/` home · `/work` all work grid · `/originals` · `/prints` · `/commissions` · `/about` · `/contact`
+`/` home · `/originals` · `/prints` · `/commissions` · `/about` · `/contact`
 
 ## Content model
 Every painting is one folder in `src/content/work/<slug>/` containing:
@@ -37,7 +37,7 @@ Every painting is one folder in `src/content/work/<slug>/` containing:
 Product copy on the site is only: `Title · Medium · W × H in · Year`. No prose on product cards.
 
 ## Commissions
-Three tiers (small / medium / large) with "from $" pricing, 50% deposit via Stripe Checkout, stated timeline, defined revision policy. Inquiry form first, deposit link second.
+Quote only. No tiers, no published or "from $" pricing, no standing deposit. Every request comes through the inquiry form and is priced individually; Annabel replies with a quote that states the timeline and revision policy.
 
 ## Rules
 - Sold work stays visible with a `Sold` badge. Never delete it.
