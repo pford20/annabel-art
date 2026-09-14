@@ -13,28 +13,44 @@ Reference aesthetic: nikeadawi.se — one flat uniform grid, minimal product cop
 - Deploy: Cloudflare Pages, auto-deploy from `main`
 - Payments: Stripe Checkout via Cloudflare Pages Functions (`/functions`), Stripe Tax enabled
 - Email list: MailerLite embed
-- Images: Astro `<Image>`, sourced from `src/content/work/<slug>/`
+- Images: Astro `<Image>`, sourced from `src/assets/work/`
 
 ## Pages
-`/` home · `/originals` · `/prints` · `/commissions` · `/about` · `/contact`
+`/` home · `/work` all work · `/work/<slug>` one piece · `/originals` · `/prints` · `/commissions` · `/about` · `/contact`
 
 ## Content model
-Every painting is one folder in `src/content/work/<slug>/` containing:
-- `index.md` with frontmatter:
-  - `title` (string)
-  - `medium` (string, e.g. "Acrylic on canvas")
-  - `width`, `height` (inches, numbers)
-  - `year` (number)
-  - `type`: `original` | `print`
-  - `price` (number, USD) — for prints this is the smallest size
-  - `status`: `available` | `sold`
-  - `edition` (number, prints only)
-  - `sizes` (array of {label, price}, prints only)
-  - `featured` (boolean)
-- `catalog.jpg` — flat square-on shot, required
-- `insitu.jpg` — hung on a wall, originals only
+Every piece on `/work` is one entry in `src/data/work.ts`, with its photo in
+`src/assets/work/`. That one file is the whole portfolio — the pages read from it.
 
-Product copy on the site is only: `Title · Medium · W × H in · Year`. No prose on product cards.
+Each entry:
+  - `slug` (string) — the web address, so `/work/<slug>`
+  - `file` (string) — filename inside `src/assets/work/`
+  - `title` (string)
+  - `year` (number, optional)
+  - `medium` (string, optional, e.g. "Acrylic on canvas")
+  - `size` (string, optional, e.g. "24 × 36 in")
+  - `status`: `available` | `sold` | `print`
+  - `price` (number, USD, optional)
+
+Optional fields left out simply don't render. Never print "TBD".
+
+`status` drives the piece page:
+  - `available` — price if there is one, plus an Enquire button that opens the
+    contact form with the title prefilled
+  - `sold` — shows `Sold`, never a price
+  - `print` — links to `/prints`
+
+Images are optimized at build time: WebP, 400–1400px, never the originals. Grid
+tiles are a uniform shape with the painting contained inside, so nothing is cropped.
+
+Product copy on the site is only: `Title · Medium · Size · Year`. No prose on product cards.
+
+### Later
+Not built, but worth preserving as intent:
+  - A real `original` | `print` type split, rather than folding it into `status`
+  - Edition sizes and per-size pricing for prints
+  - In-situ shots (hung on a wall) as a second image on originals
+  - A `featured` flag to pick the home page hero
 
 ## Commissions
 Quote only. No tiers, no published or "from $" pricing, no standing deposit. Every request comes through the inquiry form and is priced individually; Annabel replies with a quote that states the timeline and revision policy.
