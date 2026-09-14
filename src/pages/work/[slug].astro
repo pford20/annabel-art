@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { work, imageFor, altFor, formatPrice, captionParts, type Piece } from '../../data/work';
+
+export function getStaticPaths() {
+	return work.map((piece) => ({ params: { slug: piece.slug }, props: { piece } }));
+}
+
+interface Props {
+	piece: Piece;
+}
+
+const { piece } = Astro.props;
+const details = captionParts(piece);
+
+// Only "available" pieces can be bought. A price shows only once it exists,
+// so a piece with no price yet reads as available without inventing a number.
+const isAvailable = piece.status === 'available';
+const enquireHref = `/contact?piece=${encodeURIComponent(piece.title)}`;
+---
+
+<Layout
+	title={piece.title}
+	description={[piece.title, ...details].join(' · ')}
+>
+	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
+		<a class="text-sm text-charcoal transition-colors hover:text-ink" href="/work">
+			&larr; Work
+		</a>
+
+		<div class="mt-8 grid gap-10 sm:mt-12 sm:grid-cols-[minmax(0,1fr)_260px] sm:gap-16">
+			{/* Full painting, never cropped. */}
+			<Image
+				src={imageFor(piece)}
+				alt={altFor(piece)}
+				width={1400}
+				widths={[600, 900, 1400]}
+				sizes="(min-width: 1280px) 860px, (min-width: 640px) calc(100vw - 420px), 100vw"
+				class="max-h-[75vh] w-full object-contain object-left-top"
+				loading="eager"
+				fetchpriority="high"
+			/>
+
+			<div>
+				<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[40px]">
+					{piece.title}
+				</h1>
+
+				{
+					details.length > 0 && (
+						<ul class="mt-4 flex flex-col gap-1 text-[13px] text-stone" role="list">
+							{details.map((detail) => (
+								<li>{detail}</li>
+							))}
+						</ul>
+					)
+				}
+
+				<div class="mt-8 text-sm">
+					{
+						piece.status === 'sold' && <p class="text-stone">Sold</p>
+					}
+
+					{
+						piece.status === 'print' && (
+							<p class="text-charcoal">
+								Available as a{' '}
+								<a class="underline transition-colors hover:text-ink" href="/prints">
+									limited-edition print
+								</a>
+								.
+							</p>
+						)
+					}
+
+					{
+						isAvailable && (
+							<>
+								{piece.price !== undefined && (
+									<p class="text-ink">{formatPrice(piece.price)}</p>
+								)}
+								<a class="btn mt-4" href={enquireHref}>
+									Enquire
+								</a>
+							</>
+						)
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>

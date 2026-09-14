@@ -61,13 +61,13 @@ No mockup frames, no filters, no watermarks.
 
 ## Voice
 - Warm, confident, concrete. Short sentences.
-- About page in third person. Newsletters in first person.
+- About page in first person, in Annabel's voice. Newsletters in first person.
 - Product copy is data, not prose: `Title · Oil on canvas · 24 × 36 in · 2026`
 - Sold pieces stay visible, marked `Sold`
 - Never use: "unique," "stunning," "one-of-a-kind," exclamation points
 
 ## Navigation
-`Originals · Prints · Commissions · About · Contact`
+`Work · Originals · Prints · Commissions · About · Contact`
 
 ## Product Rules
 Originals — qty 1, individual price, `Sold` badge, catalog + in-situ shot

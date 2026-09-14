@@ -74,4 +74,20 @@ import { site, instagramUrl } from '../config';
 			</div>
 		</div>
 	</div>
+
+	<script>
+		// The Enquire button on a /work piece links here as
+		// /contact?piece=Concert%20Palms — prefill the message so the visitor
+		// doesn't have to retype the title. Static site, so this runs in the
+		// browser; without JavaScript the form still works, just unprefilled.
+		const piece = new URLSearchParams(window.location.search).get('piece');
+		const message = document.querySelector<HTMLTextAreaElement>('#message');
+
+		if (piece && message && !message.value) {
+			message.value = `I'm interested in "${piece}". `;
+			// Put the cursor at the end so they can keep typing.
+			message.focus({ preventScroll: true });
+			message.setSelectionRange(message.value.length, message.value.length);
+		}
+	</script>
 </Layout>
