@@ -1,10 +1,15 @@
 # Copy to .dev.vars for local testing. .dev.vars is gitignored — never commit real keys.
 # In production these live in Cloudflare > Pages > Settings > Environment variables.
 #
-# Today only RESEND_API_KEY is set in Cloudflare. Leave the other two blank until
-# annabelart.com is verified in Resend — an unverified sender domain is rejected,
-# and mail can only be delivered to the address that owns the Resend account.
+# RESEND_API_KEY is the only one you need. annabelart.online is verified in
+# Resend, so the code already sends from hello@annabelart.online and delivers to
+# hello@annabelart.online, which Cloudflare Email Routing forwards to Annabel.
+#
+# Leave the two below commented out. They only exist to override those defaults,
+# and if you set INQUIRY_TO here or in Cloudflare it wins over the Email Routing
+# rule — so to change who receives inquiries, change the rule in Cloudflare
+# instead. The defaults live in functions/_inquiry.ts.
 
 RESEND_API_KEY=
-# INQUIRY_FROM="Annabel Art <hello@annabelart.com>"   # after domain verification
-# INQUIRY_TO="annabel@annabelart.com"                 # after domain verification
+# INQUIRY_FROM="Annabel Art <hello@annabelart.online>"  # only to send from elsewhere
+# INQUIRY_TO="someone@example.com"                      # only to reroute inquiries
