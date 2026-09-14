@@ -6,22 +6,24 @@
  *
  * STATUS: live. RESEND_API_KEY is set in Cloudflare, so inquiries are emailed
  * for real. If the key is ever missing the form still accepts the message and
- * logs it instead of sending. Mail currently goes out from onboarding@resend.dev
- * to plford2000@gmail.com — see INQUIRY_TO_FALLBACK below.
+ * logs it instead of sending. Mail goes out from hello@annabelart.online and
+ * lands at the same address, which Cloudflare Email Routing forwards on to
+ * Annabel. To change who receives inquiries, change that forwarding rule in
+ * Cloudflare — not this file.
  */
 
 export interface Env {
 	/** Cloudflare > Pages > Settings > Environment variables. Never in code. */
 	RESEND_API_KEY?: string;
 	/**
-	 * Verified sender, e.g. "Annabel Art <hello@annabelart.com>". Until the
-	 * domain is verified in Resend this must stay unset, so the fallback
-	 * onboarding@resend.dev is used.
+	 * Overrides the sender. Only needed to send from a different verified
+	 * domain; otherwise leave unset and INQUIRY_FROM_DEFAULT is used.
 	 */
 	INQUIRY_FROM?: string;
 	/**
-	 * Where inquiries land. Unset in Cloudflare today, so INQUIRY_TO_FALLBACK
-	 * below is what actually receives mail.
+	 * Overrides the recipient. Normally unset — INQUIRY_TO_DEFAULT below goes
+	 * to hello@annabelart.online, and Cloudflare Email Routing decides where
+	 * that actually lands.
 	 */
 	INQUIRY_TO?: string;
 }
@@ -37,13 +39,15 @@ export interface InquiryOptions {
 
 const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024; // Resend caps the whole request ~40MB
 
+/** Verified sending domain in Resend. */
+const INQUIRY_FROM_DEFAULT = 'Annabel Art <hello@annabelart.online>';
+
 /**
- * TODO — temporary. While sending from onboarding@resend.dev, Resend will only
- * deliver to the address that owns the Resend account. Once annabelart.com is
- * verified, set INQUIRY_FROM and INQUIRY_TO in Cloudflare and this stops being
- * used.
+ * Where inquiries are sent. Cloudflare Email Routing forwards this address on
+ * to Annabel, so changing who reads the inquiries is a Cloudflare setting, not
+ * a code change.
  */
-const INQUIRY_TO_FALLBACK = 'plford2000@gmail.com';
+const INQUIRY_TO_DEFAULT = 'hello@annabelart.online';
 
 function escapeHtml(value: string): string {
 	return value
@@ -132,8 +136,9 @@ export async function handleInquiry(
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			from: env.INQUIRY_FROM ?? 'onboarding@resend.dev',
-			to: env.INQUIRY_TO ?? INQUIRY_TO_FALLBACK,
+			from: env.INQUIRY_FROM ?? INQUIRY_FROM_DEFAULT,
+			to: env.INQUIRY_TO ?? INQUIRY_TO_DEFAULT,
+			// The address typed into the form, so Reply goes to the sender.
 			reply_to: email,
 			subject: `${options.subject} — ${name}`,
 			text: body,
