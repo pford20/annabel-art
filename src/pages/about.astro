@@ -2,8 +2,42 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="About">
+<Layout
+	title="About"
+	description="Annabel paints figures drawn from feminine archetypes and dreams, in acrylic on canvas, in Fort Lauderdale."
+>
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
-		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">About</h1>
+		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">
+			About
+		</h1>
+
+		<div class="mt-12 grid gap-10 sm:mt-16 sm:grid-cols-[minmax(0,360px)_1fr] sm:gap-16">
+			<!-- PLACEHOLDER: replace with Annabel's portrait.
+			     Per BRAND.md: natural indirect light, no filters. -->
+			<div
+				class="flex aspect-[4/5] w-full items-center justify-center border border-dashed border-mist text-sm text-stone"
+			>
+				Portrait of Annabel goes here
+			</div>
+
+			<div>
+				<p class="max-w-prose text-charcoal">
+					Annabel has painted since she was a child. Her work draws on feminine archetypes
+					and the images that surface in her dreams, translated into acrylic on canvas.
+				</p>
+
+				<p class="mt-5 max-w-prose text-charcoal">
+					She paints figures that feel familiar and slightly out of place — fragments of one
+					interior life, made to fit into someone else&rsquo;s. She lives and paints in Fort
+					Lauderdale, and credits her fianc&eacute; with pushing her to take the work
+					seriously.
+				</p>
+
+				<div class="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
+					<a class="btn" href="/originals">Shop originals</a>
+					<a class="btn-secondary" href="/commissions">Request a commission</a>
+				</div>
+			</div>
+		</div>
 	</div>
 </Layout>
