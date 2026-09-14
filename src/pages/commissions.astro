@@ -1,9 +1,75 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import InquiryForm from '../components/InquiryForm.astro';
+
+const sizes = ['8 × 10 in', '11 × 14 in', '16 × 20 in', '18 × 24 in', '24 × 36 in', '30 × 40 in', 'Other'];
 ---
 
-<Layout title="Commissions">
+<Layout
+	title="Commissions"
+	description="Commission a painting in acrylic on canvas. Starting from $500."
+>
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
-		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">Commissions</h1>
+		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">
+			Commissions
+		</h1>
+
+		<p class="mt-6 max-w-prose text-charcoal">
+			Annabel paints commissions in acrylic on canvas, starting from $500. Final price depends
+			on size and complexity. Tell her what you have in mind and she will reply with a quote
+			within a few days.
+		</p>
+
+		<div class="mt-12 max-w-xl">
+			<InquiryForm
+				endpoint="/api/commission"
+				submitLabel="Request a quote"
+				success="Thank you. Your request is in, and Annabel will reply with a quote within a few days."
+			>
+				<div>
+					<label class="label" for="name">Name</label>
+					<input class="field" type="text" id="name" name="name" required autocomplete="name" />
+				</div>
+
+				<div>
+					<label class="label" for="email">Email</label>
+					<input
+						class="field"
+						type="email"
+						id="email"
+						name="email"
+						required
+						autocomplete="email"
+					/>
+				</div>
+
+				<div>
+					<label class="label" for="size">Size</label>
+					<select class="field" id="size" name="size" required>
+						<option value="">Select a size</option>
+						{sizes.map((size) => <option value={size}>{size}</option>)}
+					</select>
+				</div>
+
+				<div>
+					<label class="label" for="message">What are you imagining?</label>
+					<textarea class="field" id="message" name="message" rows="6" required></textarea>
+				</div>
+
+				<div>
+					<label class="label" for="references">
+						Reference images <span class="text-stone">(optional)</span>
+					</label>
+					<input
+						class="field"
+						type="file"
+						id="references"
+						name="references"
+						accept="image/*"
+						multiple
+					/>
+				</div>
+			</InquiryForm>
+		</div>
 	</div>
 </Layout>

@@ -1,0 +1,6 @@
+# Copy to .dev.vars for local testing. .dev.vars is gitignored — never commit real keys.
+# In production these live in Cloudflare > Pages > Settings > Environment variables.
+
+RESEND_API_KEY=
+COMMISSION_FROM="Annabel Art <commissions@example.com>"
+COMMISSION_TO="annabel@example.com"

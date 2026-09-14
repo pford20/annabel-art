@@ -1,0 +1,67 @@
+---
+interface Props {
+	/** Cloudflare Pages Function URL, e.g. /api/commission */
+	endpoint: string;
+	submitLabel: string;
+	success: string;
+}
+
+const { endpoint, submitLabel, success } = Astro.props;
+---
+
+<div data-inquiry>
+	<form method="POST" action={endpoint} enctype="multipart/form-data" class="flex flex-col gap-5">
+		<slot />
+		<div>
+			<button type="submit" class="btn">{submitLabel}</button>
+		</div>
+	</form>
+
+	<p data-success hidden class="max-w-prose text-charcoal">{success}</p>
+	<p data-error hidden class="max-w-prose text-charcoal">
+		Something went wrong sending that. Please try again in a moment.
+	</p>
+</div>
+
+<script>
+	// Progressive enhancement: without JavaScript the form still posts
+	// normally and the Function replies. With it, we stay on the page.
+	document.querySelectorAll<HTMLElement>('[data-inquiry]').forEach((wrap) => {
+		const form = wrap.querySelector('form');
+		const okMsg = wrap.querySelector<HTMLElement>('[data-success]');
+		const errMsg = wrap.querySelector<HTMLElement>('[data-error]');
+		if (!form || !okMsg || !errMsg) return;
+
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+
+			const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+			const original = button?.textContent ?? '';
+			if (button) {
+				button.disabled = true;
+				button.textContent = 'Sending…';
+			}
+			errMsg.hidden = true;
+
+			try {
+				const response = await fetch(form.action, {
+					method: 'POST',
+					body: new FormData(form),
+					headers: { Accept: 'application/json' },
+				});
+				if (!response.ok) throw new Error(String(response.status));
+
+				form.hidden = true;
+				okMsg.hidden = false;
+				okMsg.setAttribute('tabindex', '-1');
+				okMsg.focus(); // move screen readers to the confirmation
+			} catch {
+				errMsg.hidden = false;
+				if (button) {
+					button.disabled = false;
+					button.textContent = original;
+				}
+			}
+		});
+	});
+</script>

@@ -44,3 +44,71 @@
 		color: var(--color-ink);
 	}
 }
+
+@layer components {
+	/* Shared form + button styles, used by /commissions and /contact.
+	   Defined once so both forms can't drift apart. */
+	.label {
+		display: block;
+		margin-bottom: 0.5rem;
+		font-size: 0.875rem;
+		color: var(--color-charcoal);
+	}
+
+	.field {
+		width: 100%;
+		border: 1px solid var(--color-mist);
+		background-color: var(--color-paper);
+		padding: 0.625rem 0.75rem;
+		font-family: var(--font-body);
+		font-size: 16px; /* below 16px, iOS Safari zooms on focus */
+		color: var(--color-ink);
+		border-radius: 0;
+		transition: border-color 150ms ease;
+	}
+
+	.field::placeholder {
+		color: var(--color-stone);
+	}
+
+	.field:focus {
+		border-color: var(--color-ink);
+		outline: 2px solid transparent; /* keeps a visible ring in forced-colors mode */
+		outline-offset: 2px;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--color-ink);
+		background-color: var(--color-ink);
+		padding: 0.75rem 1.5rem;
+		font-size: 0.875rem;
+		color: var(--color-paper);
+		transition:
+			background-color 150ms ease,
+			border-color 150ms ease;
+	}
+
+	.btn:hover {
+		background-color: var(--color-charcoal);
+		border-color: var(--color-charcoal);
+	}
+
+	.btn-secondary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--color-mist);
+		background-color: transparent;
+		padding: 0.75rem 1.5rem;
+		font-size: 0.875rem;
+		color: var(--color-ink);
+		transition: border-color 150ms ease;
+	}
+
+	.btn-secondary:hover {
+		border-color: var(--color-ink);
+	}
+}
