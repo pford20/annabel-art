@@ -12,13 +12,15 @@ import Layout from '../layouts/Layout.astro';
 		</h1>
 
 		<div class="mt-12 grid gap-10 sm:mt-16 sm:grid-cols-[minmax(0,360px)_1fr] sm:gap-16">
-			<!-- PLACEHOLDER: replace with Annabel's portrait.
-			     Per BRAND.md: natural indirect light, no filters. -->
-			<div
-				class="flex aspect-[4/5] w-full items-center justify-center border border-dashed border-mist text-sm text-stone"
-			>
-				Portrait of Annabel goes here
-			</div>
+			<img
+				class="aspect-[2/3] w-full object-cover"
+				src="/annabel-about.jpg"
+				width="1200"
+				height="1800"
+				alt="Annabel and her fiancé standing on a stone bridge beside a lake."
+				loading="lazy"
+				decoding="async"
+			/>
 
 			<div>
 				<p class="max-w-prose text-charcoal">

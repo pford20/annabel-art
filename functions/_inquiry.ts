@@ -4,18 +4,25 @@
  * Filename starts with "_" so Cloudflare Pages treats it as a module, not a
  * route. Both forms email through Resend.
  *
- * STATUS: stub. Until RESEND_API_KEY is set it accepts the form, logs the
- * inquiry, and returns success without emailing. Once the key exists in the
- * Cloudflare dashboard it sends for real. The Resend call below is written
- * but has never run — verify it after creating the account.
+ * STATUS: live. RESEND_API_KEY is set in Cloudflare, so inquiries are emailed
+ * for real. If the key is ever missing the form still accepts the message and
+ * logs it instead of sending. Mail currently goes out from onboarding@resend.dev
+ * to plford2000@gmail.com — see INQUIRY_TO_FALLBACK below.
  */
 
 export interface Env {
 	/** Cloudflare > Pages > Settings > Environment variables. Never in code. */
 	RESEND_API_KEY?: string;
-	/** Verified sender, e.g. "Annabel Art <hello@annabelart.com>" */
+	/**
+	 * Verified sender, e.g. "Annabel Art <hello@annabelart.com>". Until the
+	 * domain is verified in Resend this must stay unset, so the fallback
+	 * onboarding@resend.dev is used.
+	 */
 	INQUIRY_FROM?: string;
-	/** Where inquiries land — Annabel's inbox. */
+	/**
+	 * Where inquiries land. Unset in Cloudflare today, so INQUIRY_TO_FALLBACK
+	 * below is what actually receives mail.
+	 */
 	INQUIRY_TO?: string;
 }
 
@@ -29,6 +36,14 @@ export interface InquiryOptions {
 }
 
 const MAX_ATTACHMENT_BYTES = 10 * 1024 * 1024; // Resend caps the whole request ~40MB
+
+/**
+ * TODO — temporary. While sending from onboarding@resend.dev, Resend will only
+ * deliver to the address that owns the Resend account. Once annabelart.com is
+ * verified, set INQUIRY_FROM and INQUIRY_TO in Cloudflare and this stops being
+ * used.
+ */
+const INQUIRY_TO_FALLBACK = 'plford2000@gmail.com';
 
 function escapeHtml(value: string): string {
 	return value
@@ -118,7 +133,7 @@ export async function handleInquiry(
 		},
 		body: JSON.stringify({
 			from: env.INQUIRY_FROM ?? 'onboarding@resend.dev',
-			to: env.INQUIRY_TO ?? 'onboarding@resend.dev',
+			to: env.INQUIRY_TO ?? INQUIRY_TO_FALLBACK,
 			reply_to: email,
 			subject: `${options.subject} — ${name}`,
 			text: body,

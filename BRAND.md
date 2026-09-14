@@ -67,12 +67,12 @@ No mockup frames, no filters, no watermarks.
 - Never use: "unique," "stunning," "one-of-a-kind," exclamation points
 
 ## Navigation
-`Work · Originals · Prints · Commissions · About · Contact`
+`Originals · Prints · Commissions · About · Contact`
 
 ## Product Rules
 Originals — qty 1, individual price, `Sold` badge, catalog + in-situ shot
 Prints — size variants, edition size, signed & numbered, COA, paper spec
-Commissions — 3 tiers with "from $", 50% deposit, timeline, revision policy
+Commissions — quote only. No tiers, no published or "from $" pricing, no standing deposit. Every request is priced individually after the inquiry form; state timeline and revision policy in the quote.
 
 ## Instagram
 - Handle matches domain as closely as available

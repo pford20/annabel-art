@@ -1,6 +1,10 @@
 # Copy to .dev.vars for local testing. .dev.vars is gitignored — never commit real keys.
 # In production these live in Cloudflare > Pages > Settings > Environment variables.
+#
+# Today only RESEND_API_KEY is set in Cloudflare. Leave the other two blank until
+# annabelart.com is verified in Resend — an unverified sender domain is rejected,
+# and mail can only be delivered to the address that owns the Resend account.
 
 RESEND_API_KEY=
-INQUIRY_FROM="Annabel Art <commissions@example.com>"
-INQUIRY_TO="annabel@example.com"
+# INQUIRY_FROM="Annabel Art <hello@annabelart.com>"   # after domain verification
+# INQUIRY_TO="annabel@annabelart.com"                 # after domain verification
