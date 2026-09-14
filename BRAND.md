@@ -50,7 +50,8 @@ Catalog shot (required on every piece)
 - Square-on, camera parallel to canvas, cropped to the artwork edge
 - Two lights at 45°, no glare, no shadow
 - Same neutral wall for every shot
-- Export 2000px longest edge, sRGB, JPG q85
+- Export 2000px longest edge, sRGB, JPG q85 — this is the source-file spec
+- The site serves WebP 400–1400px, generated from those source files at build time
 - Displayed on `paper` background with 0 border — image is the tile
 
 In-situ shot (originals only)
@@ -75,7 +76,7 @@ Prints — size variants, edition size, signed & numbered, COA, paper spec
 Commissions — quote only. No tiers, no published or "from $" pricing, no standing deposit. Every request is priced individually after the inquiry form; state timeline and revision policy in the quote.
 
 ## Instagram
-- Handle matches domain as closely as available
+- Handle: @akd_artt
 - Feed = catalog shots on `paper`, occasional process video
 - Any text graphic uses Fraunces + Inter on `paper`, nothing else
 - Bio link → site
