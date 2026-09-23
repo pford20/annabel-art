@@ -1,46 +1,170 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
-import { work, imageFor, altFor, captionParts } from '../data/work';
+import ShopGrid from '../components/ShopGrid.astro';
+import WorkGrid from '../components/WorkGrid.astro';
+import {
+	work,
+	availableWork,
+	imageFor,
+	altFor,
+	formatPrice,
+	shortCaption,
+} from '../data/work';
 
-// BRAND.md: let one painting fill the hero. To feature a different painting,
-// change the slug below to any slug in src/data/work.ts.
-const HERO_SLUG = 'saltwater-rodeo';
+// The hero is whatever is for sale first. When everything has sold, it falls
+// back to this painting instead — change the slug to feature a different one.
+const FALLBACK_HERO_SLUG = 'alligator-cowgirl';
 
-const hero = work.find((piece) => piece.slug === HERO_SLUG);
+const hero = availableWork[0] ?? work.find((piece) => piece.slug === FALLBACK_HERO_SLUG);
 if (!hero) {
 	throw new Error(
-		`Home page hero: no piece with slug "${HERO_SLUG}" in src/data/work.ts. ` +
-			`Set HERO_SLUG in src/pages/index.astro to a slug that exists.`
+		`Home page hero: nothing is available and no piece has the slug ` +
+			`"${FALLBACK_HERO_SLUG}". Set FALLBACK_HERO_SLUG in src/pages/index.astro ` +
+			`to a slug that exists in src/data/work.ts.`
 	);
 }
 
-// "Alligator Cowgirl · Acrylic on canvas · 24 × 36 in" — anything not filled
-// in yet is simply left out.
-const caption = [hero.title, ...captionParts(hero)].join(' · ');
+// With nothing for sale the page stops selling paintings and points at
+// commissions instead: no price or Buy on the hero, and no "Available now".
+const isSelling = availableWork.length > 0;
+const heroCanBuy = isSelling && Boolean(hero.buyUrl);
+
+const heroCaption = shortCaption(hero);
+const heroDetails = `/portfolio/${hero.slug}`;
+const heroEnquire = `/contact?piece=${encodeURIComponent(hero.title)}`;
+
+// Section d: the top of the portfolio, sold work included.
+const recent = work.slice(0, 6);
+
+const description = isSelling
+	? 'Original paintings by Annabel, a figurative painter in Fort Lauderdale. Available now, with free insured US shipping.'
+	: 'Paintings, prints, and commissions by Annabel, a figurative painter in Fort Lauderdale.';
 ---
 
-<Layout description={`${caption} — paintings, prints, and commissions by Annabel.`}>
+<Layout description={description}>
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
 		<h1 class="sr-only">annabel art</h1>
 
-		<a class="group block" href={`/portfolio/${hero.slug}`}>
-			{/* Contained, never cropped: the painting keeps its own proportions and
-			    shrinks to fit, so it is whole at every screen size. */}
-			<Image
-				src={imageFor(hero)}
-				alt={altFor(hero)}
-				width={1400}
-				widths={[600, 900, 1400]}
-				sizes="(min-width: 640px) 700px, 100vw"
-				class="mx-auto block h-auto max-h-[80vh] w-auto max-w-full transition-opacity duration-200 group-hover:opacity-85"
-				loading="eager"
-				fetchpriority="high"
-			/>
+		{/* a. Hero — the painting, and what it costs. */}
+		<section class="grid gap-10 sm:grid-cols-[minmax(0,1fr)_320px] sm:gap-16">
+			<a class="group block" href={heroDetails}>
+				<Image
+					src={imageFor(hero)}
+					alt={altFor(hero)}
+					width={1400}
+					widths={[600, 900, 1400]}
+					sizes="(min-width: 1280px) 800px, (min-width: 640px) calc(100vw - 420px), 100vw"
+					class="mx-auto block h-auto max-h-[70vh] w-auto max-w-full transition-opacity duration-200 group-hover:opacity-85"
+					loading="eager"
+					fetchpriority="high"
+				/>
+			</a>
 
-			<p class="mt-4 text-center text-[13px] text-stone transition-colors group-hover:text-charcoal">
-				{caption}
+			<div class="sm:pt-4">
+				<p class="max-w-prose text-charcoal">
+					Annabel is a figurative painter in Fort Lauderdale, working in acrylic with a
+					surrealist edge.
+				</p>
+
+				<div class="mt-10">
+					{isSelling && <p class="text-[13px] text-stone">Available now</p>}
+
+					<h2 class="mt-1 font-display text-2xl font-normal text-ink">
+						<a class="transition-opacity hover:opacity-70" href={heroDetails}>{hero.title}</a>
+					</h2>
+
+					{heroCaption && <p class="mt-1 text-[13px] text-stone">{heroCaption}</p>}
+
+					{
+						isSelling && hero.price !== undefined && (
+							<p class="mt-3 text-lg text-ink">{formatPrice(hero.price)}</p>
+						)
+					}
+
+					{isSelling && <p class="mt-1 text-[13px] text-stone">Free insured US shipping</p>}
+
+					<div class="mt-5 flex flex-col gap-3 sm:flex-row sm:gap-4">
+						{
+							isSelling &&
+								(heroCanBuy ? (
+									<a class="btn" href={hero.buyUrl} rel="noopener">
+										Buy
+									</a>
+								) : (
+									<a class="btn" href={heroEnquire}>
+										Enquire
+									</a>
+								))
+						}
+						<a class:list={[isSelling ? 'btn-secondary' : 'btn']} href={heroDetails}>
+							Details
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		{/* b. Everything for sale. Skipped entirely when nothing is. */}
+		{
+			isSelling && (
+				<section class="mt-24 sm:mt-32">
+					<div class="flex items-baseline justify-between gap-4">
+						<h2 class="font-display text-2xl font-normal text-ink sm:text-[32px]">
+							Available now
+						</h2>
+						<a
+							class="text-sm text-charcoal transition-colors hover:text-ink"
+							href="/originals"
+						>
+							See all originals
+						</a>
+					</div>
+
+					<div class="mt-10 sm:mt-12">
+						<ShopGrid pieces={availableWork} />
+					</div>
+				</section>
+			)
+		}
+
+		{/* c. About teaser — her own words, from /about. */}
+		<section class="mt-24 sm:mt-32">
+			<p class="max-w-prose text-charcoal">
+				So here it is. I paint because I love it, and I would rather these pieces be on your
+				wall than stacked against mine.
 			</p>
-		</a>
+
+			<div class="mt-6">
+				<a class="text-sm text-charcoal underline transition-colors hover:text-ink" href="/about">
+					Meet Annabel
+				</a>
+			</div>
+		</section>
+
+		{/* d. A look at the wider body of work, sold pieces included. */}
+		<section class="mt-24 sm:mt-32">
+			<div class="flex items-baseline justify-between gap-4">
+				<h2 class="font-display text-2xl font-normal text-ink sm:text-[32px]">Recent work</h2>
+				<a class="text-sm text-charcoal transition-colors hover:text-ink" href="/portfolio">
+					See the portfolio
+				</a>
+			</div>
+
+			<div class="mt-10 sm:mt-12">
+				<WorkGrid pieces={recent} />
+			</div>
+		</section>
+
+		{/* e. Commissions. Carries the page when nothing is for sale. */}
+		<section class="mt-24 sm:mt-32">
+			<p class="max-w-prose text-charcoal">
+				Want something made for your wall? Commissions are open.
+			</p>
+
+			<div class="mt-6">
+				<a class="btn" href="/commissions">Request a commission</a>
+			</div>
+		</section>
 	</div>
 </Layout>

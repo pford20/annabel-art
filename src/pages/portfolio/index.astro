@@ -1,7 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import WorkGrid from '../../components/WorkGrid.astro';
-import { work } from '../../data/work';
+import { galleryWork } from '../../data/work';
 ---
 
 <Layout title="Portfolio" description="Paintings by Annabel — contemporary, figurative, editorial, surreal.">
@@ -11,7 +11,7 @@ import { work } from '../../data/work';
 		</h1>
 
 		<div class="mt-12 sm:mt-16">
-			<WorkGrid pieces={work} />
+			<WorkGrid pieces={galleryWork} />
 		</div>
 	</div>
 </Layout>

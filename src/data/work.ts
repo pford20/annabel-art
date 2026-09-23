@@ -222,3 +222,24 @@ export function captionParts(piece: Piece): string[] {
 		(part): part is string => Boolean(part)
 	);
 }
+
+/**
+ * Everything for sale, newest first. "Newest" is just the order of the list
+ * above, so a new painting added at the top leads the shop.
+ */
+export const availableWork: Piece[] = work.filter((piece) => piece.status === 'available');
+
+/**
+ * Gallery order for /portfolio: everything for sale first, then the rest,
+ * each group keeping the order of the list above. Reordering blocks above
+ * still works — this only guarantees available pieces lead.
+ */
+export const galleryWork: Piece[] = [
+	...availableWork,
+	...work.filter((piece) => piece.status !== 'available'),
+];
+
+/** "Acrylic on canvas · 24 × 36 in" — skips anything not filled in yet. */
+export function shortCaption(piece: Piece): string {
+	return captionParts(piece).join(' · ');
+}

@@ -64,13 +64,26 @@ No mockup frames, no filters, no watermarks.
 - Warm, confident, concrete. Short sentences.
 - About page in first person, in Annabel's voice. Newsletters in first person.
 - Product copy is data, not prose: `Title · Acrylic on canvas · 24 × 36 in · 2026`
+- Selling copy is allowed to be plain and direct: a price, `Available`, `Sold`,
+  `Free insured US shipping`. No adjectives, no urgency, no discounts.
 - Sold pieces stay visible, marked `Sold`
 - Never use: "unique," "stunning," "one-of-a-kind," exclamation points
 
 ## Navigation
 `Portfolio · Originals · Prints · Commissions · About · Contact`
 
+## Page roles
+Home — sells. Hero is whatever is for sale first, with its price and a Buy
+button; then everything available, a line about Annabel, recent work, and
+commissions. With nothing for sale the hero falls back to a featured sold
+piece and the page leans on commissions instead.
+Originals — the shop. Only what is for sale, as cards with price and Buy.
+Portfolio — the gallery. Every painting ever, sold included, as a flat grid
+with a quiet status line. Available pieces lead.
+
 ## Product Rules
+Cards may carry status and price: `Available · $1,400` in `ink`, `Sold` in
+`stone`. A price appears only once it exists — never a placeholder.
 Originals — qty 1, individual price, `Sold` badge, catalog + in-situ shot
 Prints — size variants, edition size, signed & numbered, COA, paper spec
 Commissions — quote only. No tiers, no published or "from $" pricing, no standing deposit. Every request is priced individually after the inquiry form; state timeline and revision policy in the quote.

@@ -1,32 +1,37 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import WorkGrid from '../components/WorkGrid.astro';
-import { work } from '../data/work';
+import ShopGrid from '../components/ShopGrid.astro';
+import { availableWork } from '../data/work';
 
-// Everything currently for sale, in the same order as the portfolio grid.
-// When the last one sells this empties out and the page says so on its own —
-// nothing here needs editing.
-const available = work.filter((piece) => piece.status === 'available');
+// Everything for sale, newest first. When the last one sells this empties
+// out and the page says so on its own — nothing here needs editing.
+const forSale = availableWork;
 ---
 
 <Layout
-	title="Originals"
+	title="Available originals"
 	description={
-		available.length > 0
-			? 'Original paintings by Annabel, available now.'
+		forSale.length > 0
+			? 'Original paintings by Annabel, signed by the artist. Free insured shipping in the US.'
 			: 'Every current original has found a home. New work is on the way.'
 	}
 >
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
 		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">
-			Originals
+			Available originals
 		</h1>
 
 		{
-			available.length > 0 ? (
-				<div class="mt-12 sm:mt-16">
-					<WorkGrid pieces={available} />
-				</div>
+			forSale.length > 0 ? (
+				<>
+					<p class="mt-6 max-w-prose text-charcoal">
+						Original paintings, signed by the artist. Free insured shipping in the US.
+					</p>
+
+					<div class="mt-12 sm:mt-16">
+						<ShopGrid pieces={forSale} eagerFirst />
+					</div>
+				</>
 			) : (
 				<>
 					<p class="mt-6 max-w-prose text-charcoal">

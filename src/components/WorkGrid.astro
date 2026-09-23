@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { imageFor, altFor, type Piece } from '../data/work';
+import { imageFor, altFor, formatPrice, type Piece } from '../data/work';
 
 interface Props {
 	pieces: Piece[];
@@ -30,11 +30,22 @@ const { pieces } = Astro.props;
 						/>
 					</div>
 
-					<div class="mt-3 flex items-baseline justify-between gap-3 text-[13px]">
-						<span class="text-charcoal transition-colors group-hover:text-ink">
+					<div class="mt-3 text-[13px]">
+						<div class="text-charcoal transition-colors group-hover:text-ink">
 							{piece.title}
-						</span>
-						{piece.status === 'sold' && <span class="text-stone">Sold</span>}
+						</div>
+
+						{/* Status under the title: for sale reads in ink, sold steps back
+						    into stone so the available work carries the page. */}
+						{piece.status === 'available' && (
+							<div class="mt-0.5 text-ink">
+								{piece.price !== undefined
+									? `Available · ${formatPrice(piece.price)}`
+									: 'Available'}
+							</div>
+						)}
+						{piece.status === 'sold' && <div class="mt-0.5 text-stone">Sold</div>}
+						{piece.status === 'print' && <div class="mt-0.5 text-stone">Print only</div>}
 					</div>
 				</a>
 			</li>

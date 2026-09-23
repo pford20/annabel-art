@@ -43,7 +43,24 @@ Optional fields left out simply don't render. Never print "TBD".
 Images are optimized at build time: WebP, 400–1400px, never the originals. Grid
 tiles are a uniform shape with the painting contained inside, so nothing is cropped.
 
-Product copy on the site is only: `Title · Medium · Size · Year`. No prose on product cards.
+Product copy on the site is only: `Title · Medium · Size · Year`. No prose on
+product cards — but cards may show status and price: `Available · $1,400` in
+ink, `Sold` in stone, plus `Free insured US shipping` on a shop card.
+
+## Page roles
+Home sells, Originals is the shop, Portfolio is the gallery.
+- `/` — hero is the first available piece with its price and Buy button, then
+  every available piece as a shop card, an About teaser, six recent pieces,
+  and commissions. Nothing available: the hero falls back to
+  `FALLBACK_HERO_SLUG` in `src/pages/index.astro`, the selling sections drop
+  out, and commissions carries the page.
+- `/originals` — only what is for sale, as shop cards (image, title, medium
+  and size, price, shipping line, Buy, Details). Empty state when nothing is.
+- `/portfolio` — every painting, sold included, in the flat gallery grid with
+  a status line under each caption. Available pieces sort to the top.
+
+Two components do the rendering, both fed from `src/data/work.ts`:
+`ShopCard.astro`/`ShopGrid.astro` for selling, `WorkGrid.astro` for the gallery.
 
 ### Later
 Not built, but worth preserving as intent:
