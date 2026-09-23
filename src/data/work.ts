@@ -71,7 +71,7 @@ export const work: Piece[] = [
 		size: '24 × 30 in',
 		status: 'available',
 		price: 1200,
-		// buyUrl not set yet — add the Stripe link to turn on the Buy button
+		buyUrl: 'https://buy.stripe.com/bJe6oAcN4h1LerjcAT8ww00',
 		// year not known yet
 	},
 	{
@@ -82,7 +82,7 @@ export const work: Piece[] = [
 		size: '24 × 36 in',
 		status: 'available',
 		price: 1400,
-		// buyUrl not set yet — add the Stripe link to turn on the Buy button
+		buyUrl: 'https://buy.stripe.com/4gM5kwfZgaDn1Ex8kD8ww01',
 		// year not known yet
 	},
 	{
