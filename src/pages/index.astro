@@ -34,8 +34,9 @@ const heroCaption = shortCaption(hero);
 const heroDetails = `/portfolio/${hero.slug}`;
 const heroEnquire = `/contact?piece=${encodeURIComponent(hero.title)}`;
 
-// Section d: the top of the portfolio, sold work included.
-const recent = work.slice(0, 6);
+// Section d: past work only, so it reads as a body of work rather than
+// repeating what's already for sale higher up the page.
+const recent = work.filter((piece) => piece.status === 'sold').slice(0, 6);
 
 const description = isSelling
 	? 'Original paintings by Annabel, a figurative painter in Fort Lauderdale. Available now, with free insured US shipping.'
@@ -142,19 +143,25 @@ const description = isSelling
 			</div>
 		</section>
 
-		{/* d. A look at the wider body of work, sold pieces included. */}
-		<section class="mt-24 sm:mt-32">
-			<div class="flex items-baseline justify-between gap-4">
-				<h2 class="font-display text-2xl font-normal text-ink sm:text-[32px]">Recent work</h2>
-				<a class="text-sm text-charcoal transition-colors hover:text-ink" href="/portfolio">
-					See the portfolio
-				</a>
-			</div>
+		{/* d. A look at the wider body of work — pieces that have sold. */}
+		{
+			recent.length > 0 && (
+				<section class="mt-24 sm:mt-32">
+					<div class="flex items-baseline justify-between gap-4">
+						<h2 class="font-display text-2xl font-normal text-ink sm:text-[32px]">
+							Recent work
+						</h2>
+						<a class="text-sm text-charcoal transition-colors hover:text-ink" href="/portfolio">
+							See the portfolio
+						</a>
+					</div>
 
-			<div class="mt-10 sm:mt-12">
-				<WorkGrid pieces={recent} />
-			</div>
-		</section>
+					<div class="mt-10 sm:mt-12">
+						<WorkGrid pieces={recent} />
+					</div>
+				</section>
+			)
+		}
 
 		{/* e. Commissions. Carries the page when nothing is for sale. */}
 		<section class="mt-24 sm:mt-32">

@@ -50,8 +50,8 @@ ink, `Sold` in stone, plus `Free insured US shipping` on a shop card.
 ## Page roles
 Home sells, Originals is the shop, Portfolio is the gallery.
 - `/` — hero is the first available piece with its price and Buy button, then
-  every available piece as a shop card, an About teaser, six recent pieces,
-  and commissions. Nothing available: the hero falls back to
+  every available piece as a shop card, an About teaser, up to six sold
+  pieces, and commissions. Nothing available: the hero falls back to
   `FALLBACK_HERO_SLUG` in `src/pages/index.astro`, the selling sections drop
   out, and commissions carries the page.
 - `/originals` — only what is for sale, as shop cards (image, title, medium

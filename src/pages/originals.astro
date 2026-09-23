@@ -6,10 +6,14 @@ import { availableWork } from '../data/work';
 // Everything for sale, newest first. When the last one sells this empties
 // out and the page says so on its own — nothing here needs editing.
 const forSale = availableWork;
+
+// With nothing for sale, "Available originals" would contradict the message
+// underneath it.
+const heading = forSale.length > 0 ? 'Available originals' : 'Originals';
 ---
 
 <Layout
-	title="Available originals"
+	title={heading}
 	description={
 		forSale.length > 0
 			? 'Original paintings by Annabel, signed by the artist. Free insured shipping in the US.'
@@ -18,7 +22,7 @@ const forSale = availableWork;
 >
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
 		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">
-			Available originals
+			{heading}
 		</h1>
 
 		{
