@@ -14,7 +14,7 @@
  * TO ADD A PIECE
  *   Put the photo in src/assets/work/ and add a block below. `file` must
  *   match the filename exactly. `slug` becomes the web address, so
- *   slug: 'concert-palms' is the page /work/concert-palms.
+ *   slug: 'swamp-queen' is the page /work/swamp-queen.
  *
  * TO REORDER THE GRID
  *   Move the blocks around. The grid follows this order, top to bottom.
@@ -46,74 +46,94 @@ export interface Piece {
 
 export const work: Piece[] = [
 	{
-		slug: 'concert-palms',
-		file: 'concert-palms.jpg',
-		title: 'Concert Palms',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'lost-in-the-palms',
+		file: 'lost-in-the-palms.jpg',
+		title: 'Lost in the Palms',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'sold',
+		// year not known yet
 	},
 	{
-		slug: 'moon-and-profile',
-		file: 'moon-and-profile.jpg',
-		title: 'Moon and Profile',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'thoughts-at-dusk',
+		file: 'thoughts-at-dusk.jpg',
+		title: 'Thoughts at Dusk',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'sold',
+		// year not known yet
 	},
 	{
-		slug: 'cowgirl-alligator',
-		file: 'cowgirl-alligator.jpg',
-		title: 'Cowgirl and Alligator',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'alligator-cowgirl',
+		file: 'alligator-cowgirl.jpg',
+		title: 'Alligator Cowgirl',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'sold',
+		// year not known yet
 	},
 	{
-		slug: 'swamp-alligator',
-		file: 'swamp-alligator.jpg',
-		title: 'Swamp Alligator',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'swamp-queen',
+		file: 'swamp-queen.jpg',
+		title: 'Swamp Queen',
+		medium: 'Acrylic on canvas',
+		size: '36 × 24 in',
+		status: 'sold',
+		// year not known yet
 	},
 	{
-		slug: 'portrait-marks',
-		file: 'portrait-marks.jpg',
-		title: 'Portrait with Marks',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'fragments-of-a-dream',
+		file: 'fragments-of-a-dream.jpg',
+		title: 'Fragments of a Dream',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'sold',
+		// year not known yet
 	},
 	{
-		slug: 'purple-organic',
-		file: 'purple-organic.jpg',
-		title: 'Purple Organic',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'about-shuckin-time',
+		file: 'about-shuckin-time.jpg',
+		title: 'About Shuckin’ Time',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'sold',
+		// year not known yet
 	},
 	{
-		slug: 'vase-flowers',
-		file: 'vase-flowers.jpg',
-		title: 'Vase with Flowers',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'blooms-and-blues',
+		file: 'blooms-and-blues.jpg',
+		title: 'Blooms and Blues',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'sold',
+		// year not known yet
 	},
 	{
-		slug: 'pool-table',
-		file: 'pool-table.jpg',
-		title: 'Pool Table',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'afterhours',
+		file: 'afterhours.jpg',
+		title: 'Afterhours',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'sold',
+		// year not known yet
 	},
 	{
-		slug: 'mermaid',
-		file: 'mermaid.jpg',
-		title: 'Mermaid',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'holographic-mermaid',
+		file: 'holographic-mermaid.jpg',
+		title: 'Holographic Mermaid',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'sold',
+		// year not known yet
 	},
 	{
-		slug: 'scale-face',
-		file: 'scale-face.jpg',
-		title: 'Scale Face',
-		status: 'available',
-		// year, medium, size, price — not known yet
+		slug: 'in-between-the-scales',
+		file: 'in-between-the-scales.jpg',
+		title: 'In Between the Scales',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'sold',
+		// year not known yet
 	},
 ];
 
