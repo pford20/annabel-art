@@ -1,0 +1,94 @@
+---
+/**
+ * Asks /api/availability which paintings are still for sale and updates the
+ * page. Include it on any page that shows prices or Buy buttons.
+ *
+ * Everything here is an enhancement on top of a page that is already correct:
+ * if the request fails, times out, or JavaScript never runs, the page stays
+ * exactly as the build left it.
+ *
+ * The markup it looks for:
+ *   data-buy-block="<slug>"  price + shipping + Buy — replaced by "Sold"
+ *   data-buy-link="<slug>"   a Buy button on its own — removed
+ *   data-shop-card="<slug>"  a whole shop card — removed
+ *   data-shop-grid           the cards' container, watched for going empty
+ *   data-shop-section        hidden once the grid empties
+ *   data-shop-empty          revealed once the grid empties
+ *   data-shop-heading        retitled once the grid empties
+ */
+---
+
+<script>
+	type Availability = Record<string, boolean>;
+
+	const SOLD_LABEL = 'Sold';
+	const EMPTY_HEADING = 'Originals';
+
+	function escape(value: string): string {
+		return window.CSS && CSS.escape ? CSS.escape(value) : value.replace(/"/g, '\\"');
+	}
+
+	function show(el: HTMLElement) {
+		el.removeAttribute('hidden');
+		el.style.display = '';
+	}
+
+	function hide(el: HTMLElement) {
+		el.setAttribute('hidden', '');
+		el.style.display = 'none';
+	}
+
+	/** Swap a price-and-Buy block for a plain "Sold", matching a sold piece. */
+	function markSold(el: HTMLElement) {
+		const sold = document.createElement('p');
+		sold.className = 'text-stone';
+		sold.textContent = SOLD_LABEL;
+		el.replaceChildren(sold);
+	}
+
+	function applySold(slug: string) {
+		const id = escape(slug);
+		document
+			.querySelectorAll<HTMLElement>(`[data-buy-block="${id}"]`)
+			.forEach((el) => markSold(el));
+		document.querySelectorAll<HTMLElement>(`[data-buy-link="${id}"]`).forEach((el) => el.remove());
+		document.querySelectorAll<HTMLElement>(`[data-shop-card="${id}"]`).forEach((el) => el.remove());
+	}
+
+	/** Nothing left for sale: fall back to the empty state and commissions. */
+	function handleEmptyShop() {
+		const grid = document.querySelector<HTMLElement>('[data-shop-grid]');
+		if (!grid || grid.childElementCount > 0) return;
+
+		document.querySelectorAll<HTMLElement>('[data-shop-section]').forEach(hide);
+		document.querySelectorAll<HTMLElement>('[data-shop-empty]').forEach(show);
+
+		const heading = document.querySelector<HTMLElement>('[data-shop-heading]');
+		if (heading) heading.textContent = EMPTY_HEADING;
+	}
+
+	async function sync() {
+		let data: Availability;
+
+		try {
+			const response = await fetch('/api/availability', {
+				headers: { Accept: 'application/json' },
+			});
+			if (!response.ok) return;
+			data = (await response.json()) as Availability;
+		} catch {
+			return; // Offline, blocked, or the endpoint isn't there — leave the page alone.
+		}
+
+		if (!data || typeof data !== 'object') return;
+
+		// Only ever act on an explicit false. Anything else leaves the piece alone.
+		Object.keys(data)
+			.filter((slug) => data[slug] === false)
+			.forEach(applySold);
+
+		handleEmptyShop();
+	}
+
+	sync();
+</script>

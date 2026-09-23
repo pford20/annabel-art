@@ -13,6 +13,6 @@ const { pieces, eagerFirst = false } = Astro.props;
 
 {/* Two across on desktop, against the gallery's three — the shop reads as a
     different kind of page at a glance. */}
-<div class="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-16">
+<div class="grid grid-cols-1 gap-12 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-16" data-shop-grid>
 	{pieces.map((piece, index) => <ShopCard piece={piece} eager={eagerFirst && index === 0} />)}
 </div>

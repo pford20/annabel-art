@@ -1,7 +1,9 @@
 ---
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
-import { work, imageFor, altFor, formatPrice, captionParts, type Piece } from '../../data/work';
+import AvailabilitySync from '../../components/AvailabilitySync.astro';
+import { work, altFor, formatPrice, captionParts, type Piece } from '../../data/work';
+import { imageFor } from '../../data/images';
 
 export function getStaticPaths() {
 	return work.map((piece) => ({ params: { slug: piece.slug }, props: { piece } }));
@@ -80,7 +82,7 @@ const canBuy = isAvailable && Boolean(piece.buyUrl);
 
 					{
 						isAvailable && (
-							<>
+							<div data-buy-block={piece.slug}>
 								{piece.price !== undefined && (
 									<p class="text-ink">{formatPrice(piece.price)}</p>
 								)}
@@ -101,11 +103,13 @@ const canBuy = isAvailable && Boolean(piece.buyUrl);
 										Enquire
 									</a>
 								</div>
-							</>
+							</div>
 						)
 					}
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<AvailabilitySync />
 </Layout>

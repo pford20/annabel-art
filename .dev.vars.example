@@ -1,15 +1,23 @@
 # Copy to .dev.vars for local testing. .dev.vars is gitignored — never commit real keys.
 # In production these live in Cloudflare > Pages > Settings > Environment variables.
-#
+
+# --- Contact and commission forms -----------------------------------------
 # RESEND_API_KEY is the only one you need. annabelart.online is verified in
 # Resend, so the code already sends from hello@annabelart.online and delivers to
 # hello@annabelart.online, which Cloudflare Email Routing forwards to Annabel.
-#
+RESEND_API_KEY=
+
 # Leave the two below commented out. They only exist to override those defaults,
 # and if you set INQUIRY_TO here or in Cloudflare it wins over the Email Routing
 # rule — so to change who receives inquiries, change the rule in Cloudflare
 # instead. The defaults live in functions/_inquiry.ts.
-
-RESEND_API_KEY=
 # INQUIRY_FROM="Annabel Art <hello@annabelart.online>"  # only to send from elsewhere
 # INQUIRY_TO="someone@example.com"                      # only to reroute inquiries
+
+# --- Sold-out detection ----------------------------------------------------
+# Stripe restricted key with READ access to Payment Links and nothing else.
+# Lets the site notice a sold painting on its own: deactivate its payment link
+# in Stripe and the piece shows Sold within a minute. Leave this blank and
+# everything simply shows as available, which is how the site behaves today.
+# Used by functions/api/availability.ts.
+STRIPE_RESTRICTED_KEY=

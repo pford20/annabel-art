@@ -23,6 +23,13 @@
  *   Change status to 'sold' and delete its price and buyUrl lines. The piece
  *   stays on the site with a Sold mark and no price. Never delete sold work.
  *
+ *   Still do this even though the site checks Stripe on its own. Deactivating
+ *   the payment link is enough to stop anyone buying it twice — the site reads
+ *   that within a minute and shows Sold — but that check is only the safety
+ *   net between the sale and this edit. Editing here is what makes it
+ *   permanent, and what keeps the page correct if Stripe is ever unreachable.
+ *   See functions/api/availability.ts.
+ *
  * TO FILL IN A BLANK
  *   Fields marked "not known yet" are left out on purpose. Delete the comment
  *   and add the line, e.g.   year: 2025,
@@ -179,27 +186,8 @@ export const work: Piece[] = [
 
 /* ------------------------------------------------------------------ */
 /* Helpers used by the pages. You shouldn't need to change these.      */
+/* Image lookup lives in src/data/images.ts — see the note there.      */
 /* ------------------------------------------------------------------ */
-
-/**
- * Astro optimizes images only when they're imported from src/, so the
- * photos live in src/assets/work/ rather than public/. This picks them all
- * up at build time and keys them by filename.
- */
-const files = import.meta.glob<{ default: ImageMetadata }>('../assets/work/*.jpg', {
-	eager: true,
-});
-
-export function imageFor(piece: Piece): ImageMetadata {
-	const match = files[`../assets/work/${piece.file}`];
-	if (!match) {
-		throw new Error(
-			`No image found for "${piece.title}". Expected src/assets/work/${piece.file} — ` +
-				`check the spelling of "file" in src/data/work.ts.`
-		);
-	}
-	return match.default;
-}
 
 /** Screen-reader description, built from the title. */
 export function altFor(piece: Piece): string {

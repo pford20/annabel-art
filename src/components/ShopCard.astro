@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import { imageFor, altFor, formatPrice, shortCaption, type Piece } from '../data/work';
+import { altFor, formatPrice, shortCaption, type Piece } from '../data/work';
+import { imageFor } from '../data/images';
 
 interface Props {
 	piece: Piece;
@@ -20,7 +21,7 @@ const enquireHref = `/contact?piece=${encodeURIComponent(piece.title)}`;
 
 {/* The selling card, used on / and /originals. Deliberately louder than the
     /portfolio gallery tile: bigger image, a price, and something to press. */}
-<article class="flex flex-col">
+<article class="flex flex-col" data-shop-card={piece.slug}>
 	<a class="group block" href={detailsHref}>
 		{/* Contained, so no painting is ever cropped — it sits on paper. */}
 		<div class="flex aspect-[4/5] w-full items-center justify-center overflow-hidden">

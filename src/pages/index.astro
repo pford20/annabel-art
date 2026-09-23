@@ -3,14 +3,15 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import ShopGrid from '../components/ShopGrid.astro';
 import WorkGrid from '../components/WorkGrid.astro';
+import AvailabilitySync from '../components/AvailabilitySync.astro';
 import {
 	work,
 	availableWork,
-	imageFor,
 	altFor,
 	formatPrice,
 	shortCaption,
 } from '../data/work';
+import { imageFor } from '../data/images';
 
 // The hero is whatever is for sale first. When everything has sold, it falls
 // back to this painting instead — change the slug to feature a different one.
@@ -69,31 +70,36 @@ const description = isSelling
 				</p>
 
 				<div class="mt-10">
-					{isSelling && <p class="text-[13px] text-stone">Available now</p>}
-
-					<h2 class="mt-1 font-display text-2xl font-normal text-ink">
+					<h2 class="font-display text-2xl font-normal text-ink">
 						<a class="transition-opacity hover:opacity-70" href={heroDetails}>{hero.title}</a>
 					</h2>
 
 					{heroCaption && <p class="mt-1 text-[13px] text-stone">{heroCaption}</p>}
 
+					{/* Price, shipping and Buy live together so the availability check
+					    can swap the lot for a plain "Sold". Details sits outside, so
+					    there's still a way into the piece either way. */}
 					{
-						isSelling && hero.price !== undefined && (
-							<p class="mt-3 text-lg text-ink">{formatPrice(hero.price)}</p>
+						isSelling && (
+							<div class="mt-3" data-buy-block={hero.slug}>
+								<p class="text-[13px] text-stone">Available now</p>
+								{hero.price !== undefined && (
+									<p class="mt-1 text-lg text-ink">{formatPrice(hero.price)}</p>
+								)}
+								<p class="mt-1 text-[13px] text-stone">Free insured US shipping</p>
+							</div>
 						)
 					}
-
-					{isSelling && <p class="mt-1 text-[13px] text-stone">Free insured US shipping</p>}
 
 					<div class="mt-5 flex flex-col gap-3 sm:flex-row sm:gap-4">
 						{
 							isSelling &&
 								(heroCanBuy ? (
-									<a class="btn" href={hero.buyUrl} rel="noopener">
+									<a class="btn" href={hero.buyUrl} rel="noopener" data-buy-link={hero.slug}>
 										Buy
 									</a>
 								) : (
-									<a class="btn" href={heroEnquire}>
+									<a class="btn" href={heroEnquire} data-buy-link={hero.slug}>
 										Enquire
 									</a>
 								))
@@ -109,7 +115,7 @@ const description = isSelling
 		{/* b. Everything for sale. Skipped entirely when nothing is. */}
 		{
 			isSelling && (
-				<section class="mt-24 sm:mt-32">
+				<section class="mt-24 sm:mt-32" data-shop-section>
 					<div class="flex items-baseline justify-between gap-4">
 						<h2 class="font-display text-2xl font-normal text-ink sm:text-[32px]">
 							Available now
@@ -174,4 +180,6 @@ const description = isSelling
 			</div>
 		</section>
 	</div>
+
+	<AvailabilitySync />
 </Layout>
