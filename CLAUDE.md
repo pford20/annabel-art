@@ -16,14 +16,14 @@ Reference aesthetic: nikeadawi.se — one flat uniform grid, minimal product cop
 - Images: Astro `<Image>`, sourced from `src/assets/work/`
 
 ## Pages
-`/` home · `/work` all work · `/work/<slug>` one piece · `/originals` · `/prints` · `/commissions` · `/about` · `/contact`
+`/` home · `/portfolio` all work · `/portfolio/<slug>` one piece · `/originals` · `/prints` · `/commissions` · `/about` · `/contact`
 
 ## Content model
-Every piece on `/work` is one entry in `src/data/work.ts`, with its photo in
+Every piece on `/portfolio` is one entry in `src/data/work.ts`, with its photo in
 `src/assets/work/`. That one file is the whole portfolio — the pages read from it.
 
 Each entry:
-  - `slug` (string) — the web address, so `/work/<slug>`
+  - `slug` (string) — the web address, so `/portfolio/<slug>`
   - `file` (string) — filename inside `src/assets/work/`
   - `title` (string)
   - `year` (number, optional)

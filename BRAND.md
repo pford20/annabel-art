@@ -68,7 +68,7 @@ No mockup frames, no filters, no watermarks.
 - Never use: "unique," "stunning," "one-of-a-kind," exclamation points
 
 ## Navigation
-`Work · Originals · Prints · Commissions · About · Contact`
+`Portfolio · Originals · Prints · Commissions · About · Contact`
 
 ## Product Rules
 Originals — qty 1, individual price, `Sold` badge, catalog + in-situ shot

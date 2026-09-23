@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects. The portfolio used to live at /work, so old
+# links and bookmarks are sent to the matching /portfolio page permanently.
+# First match wins, so keep the exact path above the wildcard.
+/work     /portfolio           301
+/work/*   /portfolio/:splat    301

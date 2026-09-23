@@ -4,10 +4,10 @@ import Layout from '../../layouts/Layout.astro';
 import { work, imageFor, altFor } from '../../data/work';
 ---
 
-<Layout title="Work" description="Paintings by Annabel — contemporary, figurative, editorial, surreal.">
+<Layout title="Portfolio" description="Paintings by Annabel — contemporary, figurative, editorial, surreal.">
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
 		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">
-			Work
+			Portfolio
 		</h1>
 
 		<ul
@@ -17,7 +17,7 @@ import { work, imageFor, altFor } from '../../data/work';
 			{
 				work.map((piece) => (
 					<li>
-						<a class="group block" href={`/work/${piece.slug}`}>
+						<a class="group block" href={`/portfolio/${piece.slug}`}>
 							{/* Uniform tile so the grid stays even, but object-contain
 							    means no painting is ever cropped — it sits on paper. */}
 							<div class="flex aspect-[4/5] w-full items-center justify-center overflow-hidden">

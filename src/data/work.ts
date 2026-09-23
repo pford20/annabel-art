@@ -1,5 +1,5 @@
 /**
- * Every piece on the /work page lives in the list below. This is the only
+ * Every piece on the /portfolio page lives in the list below. This is the only
  * file you need to edit to change the portfolio — the pages read from it.
  *
  * TO EDIT A PIECE
@@ -14,7 +14,7 @@
  * TO ADD A PIECE
  *   Put the photo in src/assets/work/ and add a block below. `file` must
  *   match the filename exactly. `slug` becomes the web address, so
- *   slug: 'swamp-queen' is the page /work/swamp-queen.
+ *   slug: 'swamp-queen' is the page /portfolio/swamp-queen.
  *
  * TO REORDER THE GRID
  *   Move the blocks around. The grid follows this order, top to bottom.
@@ -28,7 +28,7 @@
 export type WorkStatus = 'available' | 'sold' | 'print';
 
 export interface Piece {
-	/** Web address: /work/<slug>. Lowercase, words joined by hyphens. */
+	/** Web address: /portfolio/<slug>. Lowercase, words joined by hyphens. */
 	slug: string;
 	/** Filename inside src/assets/work/ */
 	file: string;
