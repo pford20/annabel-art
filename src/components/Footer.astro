@@ -1,20 +1,25 @@
 ---
-import EmailSignup from './EmailSignup.astro';
 import { instagramUrl } from '../config';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="mt-24 border-t border-mist sm:mt-32">
-	<div
-		class="mx-auto grid max-w-site gap-10 px-5 py-12 sm:grid-cols-2 sm:gap-16 sm:px-12 sm:py-16"
-	>
-		<EmailSignup
-			heading="Stay in touch"
-			blurb="New work, shows, and print releases. A few times a year."
-		/>
+	<div class="mx-auto grid max-w-site gap-10 px-5 py-12 sm:gap-16 sm:px-12 sm:py-16">
+		{/* The email signup is hidden until MailerLite is set up. To bring it back:
+		     1. put back the import at the top of this file:
+		            import EmailSignup from './EmailSignup.astro';
+		     2. paste this in right above the "Elsewhere" <div> below:
+		            <EmailSignup
+		                heading="Stay in touch"
+		                blurb="New work, shows, and print releases. A few times a year."
+		            />
+		     3. add `sm:grid-cols-2` to this wrapper <div> and `sm:justify-self-end`
+		        to the "Elsewhere" <div>, so the two sit side by side again.
+		     The placeholder box itself lives in src/components/EmailSignup.astro —
+		     swap it for the MailerLite embed code there. */}
 
-		<div class="sm:justify-self-end">
+		<div>
 			<h2 class="sr-only">Elsewhere</h2>
 			<ul class="flex flex-col gap-2 text-sm">
 				<li>

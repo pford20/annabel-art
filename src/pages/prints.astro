@@ -1,6 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import EmailSignup from '../components/EmailSignup.astro';
 ---
 
 <Layout title="Prints" description="Signed, limited-edition prints from annabel art. Coming soon.">
@@ -10,11 +9,14 @@ import EmailSignup from '../components/EmailSignup.astro';
 		</h1>
 
 		<p class="mt-6 max-w-prose text-charcoal">
-			Signed, limited-edition prints are on the way. Join the list below to hear first.
+			Signed, limited-edition prints are on the way.
 		</p>
 
-		<div class="mt-10">
-			<EmailSignup />
-		</div>
+		{/* The email signup is hidden until MailerLite is set up. To bring it back:
+		    put back the import at the top of this file:
+		        import EmailSignup from '../components/EmailSignup.astro';
+		    paste this in below:
+		        <div class="mt-10"><EmailSignup /></div>
+		    and add "Join the list below to hear first." back onto the sentence above. */}
 	</div>
 </Layout>

@@ -2,8 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Originals">
+<Layout
+	title="Originals"
+	description="Every current original has found a home. New work is on the way."
+>
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
-		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">Originals</h1>
+		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">
+			Originals
+		</h1>
+
+		<p class="mt-6 max-w-prose text-charcoal">
+			Every current original has found a home. New work is on the way.
+		</p>
+
+		<div class="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
+			<a class="btn" href="/portfolio">See the portfolio</a>
+			<a class="btn-secondary" href="/commissions">Commission a painting</a>
+		</div>
 	</div>
 </Layout>

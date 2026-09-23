@@ -1,17 +1,46 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
+import { work, imageFor, altFor, captionParts } from '../data/work';
+
+// BRAND.md: let one painting fill the hero. To feature a different painting,
+// change the slug below to any slug in src/data/work.ts.
+const HERO_SLUG = 'alligator-cowgirl';
+
+const hero = work.find((piece) => piece.slug === HERO_SLUG);
+if (!hero) {
+	throw new Error(
+		`Home page hero: no piece with slug "${HERO_SLUG}" in src/data/work.ts. ` +
+			`Set HERO_SLUG in src/pages/index.astro to a slug that exists.`
+	);
+}
+
+// "Alligator Cowgirl · Acrylic on canvas · 24 × 36 in" — anything not filled
+// in yet is simply left out.
+const caption = [hero.title, ...captionParts(hero)].join(' · ');
 ---
 
-<Layout>
+<Layout description={`${caption} — paintings, prints, and commissions by Annabel.`}>
 	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
 		<h1 class="sr-only">annabel art</h1>
 
-		<!-- Shell. BRAND.md: let one painting fill the hero. This becomes the
-		     featured piece once work is added to the content collection. -->
-		<div
-			class="flex aspect-[4/5] w-full items-center justify-center border border-dashed border-mist text-sm text-stone sm:aspect-[3/2]"
-		>
-			Featured painting
-		</div>
+		<a class="group block" href={`/portfolio/${hero.slug}`}>
+			{/* Contained, never cropped: the painting keeps its own proportions and
+			    shrinks to fit, so it is whole at every screen size. */}
+			<Image
+				src={imageFor(hero)}
+				alt={altFor(hero)}
+				width={1400}
+				widths={[600, 900, 1400]}
+				sizes="(min-width: 640px) 700px, 100vw"
+				class="mx-auto block h-auto max-h-[80vh] w-auto max-w-full transition-opacity duration-200 group-hover:opacity-85"
+				loading="eager"
+				fetchpriority="high"
+			/>
+
+			<p class="mt-4 text-center text-[13px] text-stone transition-colors group-hover:text-charcoal">
+				{caption}
+			</p>
+		</a>
 	</div>
 </Layout>
