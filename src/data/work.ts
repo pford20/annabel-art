@@ -2,25 +2,38 @@
  * Every piece on the /portfolio page lives in the list below. This is the only
  * file you need to edit to change the portfolio — the pages read from it.
  *
- * TO EDIT A PIECE
- *   Change the text between the quotes. Titles are placeholders for now.
+ * TO ADD A NEW PAINTING FOR SALE
+ *   1. Put the photo in src/assets/work/ — e.g. saltwater-rodeo.jpg
+ *   2. Copy an existing block below and paste it where you want it in the
+ *      list. The grid runs top to bottom, so the top block shows first.
+ *   3. Fill it in:
+ *          slug:   'saltwater-rodeo'          the web address, /portfolio/saltwater-rodeo
+ *          file:   'saltwater-rodeo.jpg'      must match the filename exactly
+ *          title:  'Saltwater Rodeo'
+ *          medium: 'Acrylic on canvas'
+ *          size:   '24 × 36 in'
+ *          status: 'available'
+ *          price:  1400                       numbers only — no $ and no comma
+ *   4. When you have a Stripe payment link for it, add one more line:
+ *          buyUrl: 'https://buy.stripe.com/...'
+ *      That turns on the Buy button. Until then the page shows the price
+ *      and an Enquire button, which is fine — nothing looks broken.
+ *
+ * WHEN A PAINTING SELLS
+ *   Change status to 'sold' and delete its price and buyUrl lines. The piece
+ *   stays on the site with a Sold mark and no price. Never delete sold work.
  *
  * TO FILL IN A BLANK
- *   Fields marked "not known yet" are left out on purpose. Delete the
- *   comment and add the line, e.g.   year: 2025,
- *   Anything you leave out simply doesn't appear on the site — it never
- *   prints "TBD".
- *
- * TO ADD A PIECE
- *   Put the photo in src/assets/work/ and add a block below. `file` must
- *   match the filename exactly. `slug` becomes the web address, so
- *   slug: 'swamp-queen' is the page /portfolio/swamp-queen.
+ *   Fields marked "not known yet" are left out on purpose. Delete the comment
+ *   and add the line, e.g.   year: 2025,
+ *   Anything you leave out simply doesn't appear — it never prints "TBD".
  *
  * TO REORDER THE GRID
  *   Move the blocks around. The grid follows this order, top to bottom.
  *
  * STATUS can be one of three words:
- *   'available' — for sale. Shows the price if there is one, plus Enquire.
+ *   'available' — for sale. Shows the price if there is one, and a Buy button
+ *                 if there is a buyUrl. Otherwise price plus Enquire.
  *   'sold'      — shows a Sold mark and no price. Keep sold work here.
  *   'print'     — original not for sale; links to the Prints page instead.
  */
@@ -42,9 +55,36 @@ export interface Piece {
 	status: WorkStatus;
 	/** Price in US dollars, numbers only: 1200 not "$1,200" */
 	price?: number;
+	/**
+	 * Stripe payment link, e.g. 'https://buy.stripe.com/...'. Add this and an
+	 * available piece gets a Buy button; leave it off and it shows Enquire.
+	 */
+	buyUrl?: string;
 }
 
 export const work: Piece[] = [
+	{
+		slug: 'seahorse-cowgirl',
+		file: 'seahorse-cowgirl.jpg',
+		title: 'Seahorse Cowgirl',
+		medium: 'Acrylic on canvas',
+		size: '24 × 30 in',
+		status: 'available',
+		price: 1200,
+		// buyUrl not set yet — add the Stripe link to turn on the Buy button
+		// year not known yet
+	},
+	{
+		slug: 'saltwater-rodeo',
+		file: 'saltwater-rodeo.jpg',
+		title: 'Saltwater Rodeo',
+		medium: 'Acrylic on canvas',
+		size: '24 × 36 in',
+		status: 'available',
+		price: 1400,
+		// buyUrl not set yet — add the Stripe link to turn on the Buy button
+		// year not known yet
+	},
 	{
 		slug: 'lost-in-the-palms',
 		file: 'lost-in-the-palms.jpg',

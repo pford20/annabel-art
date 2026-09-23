@@ -18,6 +18,10 @@ const details = captionParts(piece);
 // so a piece with no price yet reads as available without inventing a number.
 const isAvailable = piece.status === 'available';
 const enquireHref = `/contact?piece=${encodeURIComponent(piece.title)}`;
+
+// Buy appears once there's a Stripe link on the piece in src/data/work.ts.
+// Until then the page still shows the price and an Enquire button.
+const canBuy = isAvailable && Boolean(piece.buyUrl);
 ---
 
 <Layout
@@ -80,9 +84,23 @@ const enquireHref = `/contact?piece=${encodeURIComponent(piece.title)}`;
 								{piece.price !== undefined && (
 									<p class="text-ink">{formatPrice(piece.price)}</p>
 								)}
-								<a class="btn mt-4" href={enquireHref}>
-									Enquire
-								</a>
+
+								{canBuy && (
+									<p class="mt-2 text-[13px] text-stone">
+										Free insured US shipping &middot; Local pickup in Fort Lauderdale
+									</p>
+								)}
+
+								<div class="mt-4 flex flex-col gap-3 sm:flex-row sm:gap-4">
+									{canBuy && (
+										<a class="btn" href={piece.buyUrl} rel="noopener">
+											Buy
+										</a>
+									)}
+									<a class:list={[canBuy ? 'btn-secondary' : 'btn']} href={enquireHref}>
+										Enquire
+									</a>
+								</div>
 							</>
 						)
 					}

@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+{/* Where the Stripe payment links send buyers after a successful checkout.
+    Set this as the success URL on each payment link in Stripe:
+    https://annabelart.online/thank-you */}
+<Layout
+	title="Thank you"
+	description="Your painting is reserved."
+>
+	<div class="mx-auto max-w-site px-5 py-16 sm:px-12 sm:py-24">
+		<h1 class="font-display text-[32px] font-light leading-[1.1] text-ink sm:text-[48px]">
+			Thank you
+		</h1>
+
+		<p class="mt-6 max-w-prose text-charcoal">
+			Your painting is reserved. You&rsquo;ll get a receipt from Stripe, and Annabel will be
+			in touch about delivery.
+		</p>
+
+		<div class="mt-10">
+			<a class="btn" href="/portfolio">See the portfolio</a>
+		</div>
+	</div>
+</Layout>
